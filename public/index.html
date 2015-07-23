@@ -1,0 +1,29 @@
+<!doctype html>
+<html ng-app="getTweets">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Get Tweets - NowPlaying</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/styles.css">
+
+    <!-- SPELLS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="/js/core.js"></script>
+
+</head>
+<body ng-controller="mainController">
+    <div class="container">
+        <div id="tweet-list" class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <div class="checkbox" ng-repeat="tweet in tweets">
+                    <label>
+                        {{ tweet.text }}
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
