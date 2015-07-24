@@ -34,11 +34,11 @@ twitter.get('search/tweets', { q: '#nowplaying', count: 5, result_type: 'recent'
   tweets = res.statuses;
 
   for (index in tweets) {
-    console.log(tweets[index].text);
+    console.log(index + " " +tweets[index].text);
     //res.json(tweets[index].text);
     //res.json(tweets);
   }
-  console.log(res.text);
+  console.log("Res:" + res.tweets);
   //res.json("{a: 'b', c: 'd'}");
 });
 

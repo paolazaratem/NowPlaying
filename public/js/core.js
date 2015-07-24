@@ -1,10 +1,11 @@
 // public/core.js
 var getTweets = angular.module('getTweets', []);
 
+//este codigo funciona correctamente
 function mainController($scope, $http) {
     $scope.formData = {};
 
-    // when landing on the page, get all todos and show them
+    // when landing on the page, get all tweets and show them
     $http.get('/search/tweets')
         .success(function(data) {
             $scope.tweets = data;
@@ -14,5 +15,4 @@ function mainController($scope, $http) {
         .error(function(data) {
             console.log('Error: ' + data);
         });
-
 }
