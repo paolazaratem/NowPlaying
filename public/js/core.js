@@ -1,4 +1,3 @@
-// public/core.js
 var getTweets = angular.module('getTweets', []);
 
 //este codigo funciona correctamente
