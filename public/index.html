@@ -30,6 +30,13 @@
 </script>
 </head>
 <body ng-controller="mainController">
+    <!-- this text input is binded to a variable in the javascript controller -->
+    <input type="hidden"  ng-model="latitude">
+    <div>
+        <p>Latitude: ({{latitude}})</p>
+        <p>Longitude: ({{longitude}})</p>
+    </div>
+
 <div class="header">    
     <div class="wrap pos-relative">
        
@@ -66,7 +73,7 @@
     </div>        
     </div>
 </div>
- <div id="map-canvas"></div>
+<div id="map-canvas"></div>
 <div class="wrap">
     <div class="content">
         <div class="vdo-log">
@@ -95,5 +102,6 @@
     </div>
     <div class="footer">
     </div>
+<input type="hidden" ng-model="longitude">
 </body>
 </html>

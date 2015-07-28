@@ -1,7 +1,19 @@
 var getTweets = angular.module('getTweets', ['ngSanitize']);
 
-function mainController($scope, $http, $timeout) {
+function mainController($scope, $http, $timeout, $window) {
   $scope.formData = {};
+  // set a default latitude value
+  $window.navigator.geolocation.getCurrentPosition(function(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    console.log(position);
+
+    $scope.$apply(function() {
+      $scope.latitude = latitude;
+      $scope.longitude = longitude;
+    });
+  });
+
 
   // initiate masonry.js
   $scope.msnry = new Masonry('#tweet-list', {
@@ -22,8 +34,6 @@ function mainController($scope, $http, $timeout) {
     .success(function(data) {
       $scope.tweets = data;
       console.log("*********** success from mainController");
-      console.log(data);
-      console.log($scope.tweets);
 
       // render tweets with widgets.js
       $timeout(function() {
@@ -34,3 +44,26 @@ function mainController($scope, $http, $timeout) {
       console.log('Error: ' + data);
     });
 }
+
+/*
+
+//-----------------------
+function get_location() {
+  navigator.geolocation.getCurrentPosition(show_map);
+  console.log('nav: ', navigator);
+}
+
+function show_map(position) {
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
+
+  self.mapoutput = "http://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+  console.log("latitude: ", latitude);
+  console.log("longitude: ", longitude);
+}
+
+get_location();
+
+
+
+*/
