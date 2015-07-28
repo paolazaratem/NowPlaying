@@ -49,7 +49,6 @@ twitter.get('search/tweets', {
   count: 5,
   result_type: 'recent'
 }, function(req, res) {
-console.log("latitude: " + req.latitude );
   tweets = res.statuses;
 
   for (index in tweets) {
