@@ -1,53 +1,51 @@
-
 <!DOCTYPE HTML>
-<html>
+<html ng-app="getTweets">
 <head>
-<title>GetTweets #NowPlaying</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="twitter:widgets:csp" content="o">
 
-<!-- Latest compiled and minified CSS -->
+<title>GetTweets #NowPlaying</title>
+
+<!-- Files CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link href="css/style-template.css" rel="stylesheet"/>
 
+<!-- Files javascript  -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular-resource.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular-sanitize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-resource.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-sanitize.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js"></script>
     <script src="//platform.twitter.com/widgets.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
     <script src="js/core.js"></script>
+    <script src="js/geolocation.js"></script>
 
+<!-- script button Tweet#NowPlaying -->
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 </script>
-
 </head>
 <body ng-controller="mainController">
-
-        <div id="tweet-list" class="row">
-            <div class="col-sm-4 col-sm-offset-4">
-                <div class="checkbox" ng-repeat="tweet in tweets">
-                    <label>
-                        {{ tweet.text }}
-                    </label>
-                </div>
-            </div>
-        </div>
-<div class="header">
-    <h1> #nowplaying in San Francisco </h1>
+<div class="header">    
     <div class="wrap pos-relative">
        
         <div class="float-left">
+            <br>
+            <br>    
+            <h1> #nowplaying in San Francisco </h1>    
             <div>
                 <br>
                 <p>This page shows #nowplaying tweets in San Francisco that contain a youtube link. It also allows you to post a #nowplaying tweet with a YouTube link </p>
+                <br>
+                <br> 
             </div>
         </div>
-
     <div class="clear"></div>
-    
+
     <form class="form-inline">
         <div class="form-group">
             <label for="exampleInputName2">Video URL: </label>
@@ -57,85 +55,41 @@
             <label for="exampleInputEmail2">Comment: </label>
             <input type="email" class="form-control" id="exampleInputEmail2" placeholder="I love music">
         </div>
-        <button type="submit" class="btn btn-default">
-            <a href="https://twitter.com/intent/tweet?button_hashtag=NowPlaying" class="twitter-hashtag-button" data-related="PaolaZarateM">Tweet #NowPlaying</a>
-        </button>
+        <a href="https://twitter.com/intent/tweet?button_hashtag=NowPlaying" class="twitter-hashtag-button" data-related="PaolaZarateM">Tweet #NowPlaying</a>
+        <br>
+        <br> 
     </form>
+                </div>
+          </div>
+    </div>
+
     </div>        
-	<div class="clear"></div>
     </div>
 </div>
-<div class="clear"></div>
+ <div id="map-canvas"></div>
 <div class="wrap">
     <div class="content">
         <div class="vdo-log">
             <div class="heading"><h2>Most <span>Recent</span></h2></div>
-            <div class="vdo-list">
-                
-                   <div class="embed-responsive embed-responsive-4by3">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/watch?v=HgzGwKwLmgM" frameborder="0" allowfullscreen></iframe>
+            <div class="vdo-list">                
+            <div class="vdo-info">
+                <div class="vdo-desc">
+                    <div id="tweet-list">
+                        <div ng-repeat="tweet in tweets" class="tweet-item">
+                            <div ng-bind-html="tweet.oEmbed.html"></div>
+                                <div class="tweet-details">Source: <span ng-bind-html="tweet.source"></span>
+                                </div>
+                            <!-- <div class="vdo-title">
+                                <p>
+                                <h2>{{ tweet.text }}</h3>
+                                <h3>{{ tweet.user.screen_name }}</h3>
+                                <a class="twitter-tweet-button" href="https://twitter.com/share" lang="de" xml:lang="de">Tweet</a>
+                            </p>-->
+                            <br>
+                            </div>
+                        </div>
                     </div>
-                
-                <div class="vdo-info">
-                    <div class="vdo-title"><a href="preview.html"><h3>Revenge Of The Penguin - Part 1</h3></a></div>
-                    <div class="vdo-desc">   {{ tweet.text }}</div>
-                    <div class="vdo-detail">10 minutes ago <span>|</span> 562 <a href="">Downloads</a> <span>|</span> 15,639 views</div>
                 </div>
-                <div class="clear"></div>
-            </div>
-            <div class="vdo-list">
-                <div class="vdo-thumb">
-                    <a href="" style="background-image:url(http://lorempixel.com/125/100);"><span>02:56</span></a>
-                </div>
-                <div class="vdo-info">
-                    <div class="vdo-title"><a href="preview.html"><h3>Revenge Of The Penguin - Part 1</h3></a></div>
-                    <div class="vdo-desc">This got some cool moves. See for yourself how he fights for his girl.This got some cool moves. See for yourself how he fights for his girl.This got some cool moves. See for yourself how he fights for his girl.</div>
-                    <div class="vdo-detail">10 minutes ago <span>|</span> 562 <a href="">Downloads</a> <span>|</span> 15,639 views</div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="vdo-list">
-                <div class="vdo-thumb">
-                    <a href="" style="background-image:url(http://lorempixel.com/125/100);"><span>02:56</span></a>
-                </div>
-                <div class="vdo-info">
-                    <div class="vdo-title"><a href="preview.html"><h3>Revenge Of The Penguin - Part 1</h3></a></div>
-                    <div class="vdo-desc">This got some cool moves. See for yourself how he fights for his girl.This got some cool moves. See for yourself how he fights for his girl.This got some cool moves. See for yourself how he fights for his girl.</div>
-                    <div class="vdo-detail">10 minutes ago <span>|</span> 562 <a href="">Downloads</a> <span>|</span> 15,639 views</div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="vdo-list">
-                <div class="vdo-thumb">
-                    <a href="" style="background-image:url(http://lorempixel.com/125/100);"><span>02:56</span></a>
-                </div>
-                <div class="vdo-info">
-                    <div class="vdo-title"><a href="preview.html"><h3>Revenge Of The Penguin - Part 1</h3></a></div>
-                    <div class="vdo-desc">This got some cool moves. See for yourself how he fights for his girl.This got some cool moves. See for yourself how he fights for his girl.This got some cool moves. See for yourself how he fights for his girl.</div>
-                    <div class="vdo-detail">10 minutes ago <span>|</span> 562 <a href="">Downloads</a> <span>|</span> 15,639 views</div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="vdo-list">
-                <div class="vdo-thumb">
-                    <a href="" style="background-image:url(http://lorempixel.com/125/100);"><span>02:56</span></a>
-                </div>
-                <div class="vdo-info">
-                    <div class="vdo-title"><a href="preview.html"><h3>Revenge Of The Penguin - Part 1</h3></a></div>
-                    <div class="vdo-desc">This got some cool moves. See for yourself how he fights for his girl.This got some cool moves. See for yourself how he fights for his girl.This got some cool moves. See for yourself how he fights for his girl.</div>
-                    <div class="vdo-detail">10 minutes ago <span>|</span> 562 <a href="">Downloads</a> <span>|</span> 15,639 views</div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-            <div class="page-nav">
-                <ul>
-                    <li><a href="#" >&laquo; Prev</a></li>
-                    <li><span class="current">1</span></li>
-                    <li><a href="#" >2</a></li>
-                    <li><a href="#" >3</a></li>
-                    <li><a href="#" >Next &raquo;</a></li> 
-                </ul>
             </div>
         </div>
     </div>
